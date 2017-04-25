@@ -11,10 +11,12 @@ NORMAL_FONT=$(tput sgr0)
 
 
 # Firstly, update all packages
-echo "${BOLD}Update your system... to Windows 10. Thx)${NORMAL_FONT}"
-
+sudo apt-get install fortune cowsay
+$SETCOLOR_SUCCESS
+cowsay -f stegosaurus "${BOLD}Update your system... to Windows!                  ${NORMAL_FONT}"
+$SETCOLOR_NORMAL
 # 4th Flask
-echo "${BOLD}Install pip...${NORMAL_FONT}"
+cowsay -f stegosaurus "${BOLD}Install pip...${NORMAL_FONT}"
 sudo apt-get update -y
 sudo apt install -y python-pip
 if [ $? -eq 0 ]; then
@@ -30,7 +32,7 @@ else
 fi
 
 # 3d, Installing DateTime parser
-echo "${BOLD}Install DateUtil...${NORMAL_FONT}"
+cowsay -f stegosaurus "${BOLD}Install DateUtil...${NORMAL_FONT}"
 pip install python-dateutil
 if [ $? -eq 0 ]; then
     $SETCOLOR_SUCCESS
@@ -46,7 +48,7 @@ fi
 
 
 # Installing Celery
-echo "${BOLD}Install Celery...${NORMAL_FONT}"
+cowsay -f stegosaurus "${BOLD}Install Celery...${NORMAL_FONT}"
 # apt list --installed
 pip install celery
 if [ $? -eq 0 ]; then
@@ -61,7 +63,7 @@ else
     echo
 fi
 
-echo "${BOLD}Fix Celery...${NORMAL_FONT}"
+cowsay -f stegosaurus "${BOLD}Fix Celery...${NORMAL_FONT}"
 # apt list --installed
 pip install -e git://github.com/alanhamlett/celery.git@73147a9da31f2932eb4778e9474fbe72f23d21c2#egg=Celery
 if [ $? -eq 0 ]; then
@@ -76,7 +78,7 @@ else
     echo
 fi
 
-echo "${BOLD}Install requests...${NORMAL_FONT}"
+cowsay -f stegosaurus "${BOLD}Install requests...${NORMAL_FONT}"
 # apt list --installed
 pip install requests
 if [ $? -eq 0 ]; then
@@ -91,7 +93,7 @@ else
     echo
 fi
 
-echo "${BOLD}Add Celery user...${NORMAL_FONT}"
+cowsay -f stegosaurus "${BOLD}Add Celery user...${NORMAL_FONT}"
 
 sudo adduser celery
 sudo mkdir /var/log/celery/
@@ -110,8 +112,8 @@ else
     $SETCOLOR_NORMAL
     echo
 fi
+cowsay -f stegosaurus "${BOLD}Build configuration files...${NORMAL_FONT}"
 
-echo "${BOLD}Build configuration files...${NORMAL_FONT}"
 cd /etc/init.d/
 wget https://raw.githubusercontent.com/celery/celery/3.1/extra/generic-init.d/celeryd
 chmod +x celeryd
@@ -131,7 +133,7 @@ else
 fi
 
 # Configure Worker
-echo "${BOLD}Let's configure this worker! ${NORMAL_FONT}"
+cowsay -f stegosaurus "${BOLD}Let's configure this worker! ${NORMAL_FONT}"
 
 read -p 'Bot token: ' token
 read -p 'Gateway URL: ' gt
@@ -177,8 +179,7 @@ else
 fi
 
 
-
-echo "${BOLD}Start Celery Worker...${NORMAL_FONT}"
+cowsay -f stegosaurus "${BOLD}Start Celery Worker...${NORMAL_FONT}"
 
 /etc/init.d/celeryd start
 #celery worker -l info -A main.celery -Q nlp,reminders --statedb=/var/run/celery/%n.state --autoscale=10,3
